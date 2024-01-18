@@ -3,6 +3,7 @@ window.onload = () => {
     const submit = document.getElementById("btn");
     const todos = document.getElementById("todos");
     let item = null;
+    // document.getElementById("text").style.bottom="2rem"
 
     submit.addEventListener("click", (e) => {
         e.preventDefault();
@@ -10,6 +11,10 @@ window.onload = () => {
             item.innerHTML = document.getElementById("place").value;
             document.getElementById("place").value = "";
             submit.value = "Submit"
+            document.getElementById("text").innerHTML = `Successfully Edited!!`;
+            setTimeout(() => {
+                    document.getElementById("text").innerHTML = "";
+                },[3000])
             return;
         }
         if (document.getElementById("place").value == "" || document.getElementById("place").value.trim("") == "") {
@@ -46,15 +51,20 @@ window.onload = () => {
             input.value = e.target.parentNode.parentNode.childNodes[0].innerHTML;
             submit.value = "Edit"
             item = e.target.parentNode.parentNode.childNodes[0];
+            
         })
 
         dlt.addEventListener("click", (e) => {
             if (confirm("Are you sure?")) {
                 const remove = e.target.parentNode.parentNode;
-                console.log(remove)
+                console.log(remove.childNodes[0])
                 todos.removeChild(remove);
                 document.getElementById("place").value = "";
+                document.getElementById("text").innerHTML = `${remove.childNodes[0].innerHTML} is Successfully Deleted!!`;
                 submit.value = "Submit"
+                setTimeout(() => {
+                    document.getElementById("text").innerHTML = "";
+                },[3000])
             }
         })
     })
